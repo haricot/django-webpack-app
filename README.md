@@ -18,6 +18,9 @@ $ cd project/
 $ docker-compose -f  docker-compose.yml build
 $ docker-compose -f  docker-compose.yml up
 
+because a bug for now we need this command for collect (js,other) : 
+DJANGO_STATIC_ROOT=True ./manage.py  runserver 
+
 # Template for a modern Django app
 
 Use with cookiecutter: **`cookiecutter https://github.com/ProjectTemplates/django-webpack-app.git`**
