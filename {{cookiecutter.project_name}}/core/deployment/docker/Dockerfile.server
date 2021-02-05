@@ -8,11 +8,13 @@ ENV PYTHONDONTWRITEBYTECODE=on
 ENV PYTHONFAULTHANDLER=on
 ENV PYTHONUNBUFFERED=on
 ENV PYTHONPATH=/opt/app
+ARG DJANGO_STATIC_ROOT=/opt/static
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential curl && \
     curl -sL https://deb.nodesource.com/setup_15.x | bash - && \
     apt-get install -y nodejs && \
+    apt-get install -y git && \
     rm -rf /var/lib/apt/lists/*
 
 RUN pip install "poetry==$POETRY_VERSION" \
@@ -33,5 +35,3 @@ COPY pyproject.toml poetry.loc[k] /opt/app/
 RUN bash ./install.sh
 
 ENTRYPOINT ["bash", "./run.sh"]
-
-

@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 import environ
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -31,8 +31,10 @@ INSTALLED_APPS = [
     'webpack_loader',
     'corsheaders',
     'django_extensions',
+     rest_framework.authtoken',
     'rest_framework',
     'drf_yasg',
+    'drf_registration',
     'server.app.ServerConfig',
 ]
 
@@ -120,21 +122,61 @@ else:
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': default_permissions,
 }
+AUTHENTICATION_BACKENDS = [
+    'drf_registration.auth.MultiFieldsModelBackend',
+]
 
-STATICFILES_DIRS = (BASE_DIR / 'dist',)
+AUTH_USER_MODEL = 'server.User'
+
+EMAIL_HOST = 'smtp.mailgun.org'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'huychau.dev@gmail.com'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+}
+
+# DRF REGISTRATION configurations
+DRF_REGISTRATION = {
+    'USER_ACTIVATE_TOKEN_ENABLED': False,
+    'REGISTER_SEND_WELCOME_EMAIL_ENABLED': False,
+    'FACEBOOK_LOGIN_ENABLED': False,
+    'GOOGLE_LOGIN_ENABLED': True,
+
+    'LOGIN_USERNAME_FIELDS': ['email', 'username', 'first_name'],
+}
+import os
+STATICFILES_DIRS = (BASE_DIR / 'dist',
+  os.path.join(BASE_DIR , 'node_modules', 'bootstrap')
+)
+
 
 SWAGGER_SETTINGS = {
     'DEFAULT_INFO': 'server.urls.openapi_info',
 }
 
-LANGUAGE_CODE = 'ru-RU'
+LANGUAGE_CODE = 'fr-FR'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = '/static/'
-STATIC_ROOT = '/opt/static'
+
+dev_static = os.getenv('DJANGO_STATIC_ROOT')
+
+if not dev_static:
+    STATIC_ROOT = '/opt/static'
+else:
+    STATIC_ROOT = '../static'
+
+# futur possible directly with webpack https://pascalw.me/blog/2020/04/19/webpack-django.html
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 WEBPACK_LOADER = {
     'DEFAULT': {
         'CACHE': not DEBUG,

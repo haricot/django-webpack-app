@@ -1,38 +1,31 @@
+from django.conf.urls import include
+from django.urls import path
 from django.contrib import admin
-from django.urls import include, path, re_path
-from drf_yasg import openapi
-from drf_yasg.views import get_schema_view
+
 from rest_framework import permissions
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
 
-from conf import DEBUG
+from .views import HomePageView
 
-if DEBUG:
-    permission_classes = (permissions.AllowAny,)
-else:
-    permission_classes = (permissions.IsAdminUser,)
-
-openapi_info = openapi.Info(
-    title='{{ cookiecutter.project_name|capitalize }} API',
-    default_version='v1',
-    description='Server API for data store',
-)
 schema_view = get_schema_view(
-    openapi_info,
-    public=True,
-    permission_classes=permission_classes,
+   openapi.Info(
+      title="DRF Registration API",
+      default_version='v1',
+      description="DRF Registration",
+      terms_of_service="https://www.google.com/policies/terms/",
+      contact=openapi.Contact(email="contact@snippets.local"),
+      license=openapi.License(name="BSD License"),
+   ),
+   public=True,
+   permission_classes=(permissions.AllowAny,),
 )
 
 urlpatterns = [
-    path('api/', include('api.urls')),
+
     path('admin/', admin.site.urls),
-    path('auth/', include('rest_framework.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
-    re_path(
-        r'^api/swagger(?P<format>\.json|\.yaml)$',
-        schema_view.without_ui(cache_timeout=0),
-        name='schema-json',
-    ),
-    re_path(
-        r'^api/swagger/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'
-    ),
+    path('api/accounts/', include('drf_registration.urls')),
+    path('home/', HomePageView.as_view(), name='home'),
+    path('docs/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+    path('docs/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
