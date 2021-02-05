@@ -31,7 +31,7 @@ INSTALLED_APPS = [
     'webpack_loader',
     'corsheaders',
     'django_extensions',
-     rest_framework.authtoken',
+     'rest_framework.authtoken',
     'rest_framework',
     'drf_yasg',
     'drf_registration',
