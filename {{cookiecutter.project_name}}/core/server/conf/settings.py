@@ -69,16 +69,26 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'server.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env.str('DB_NAME'),
-        'USER': env.str('DB_USER'),
-        'PASSWORD': env.str('DB_PASSWORD'),
-        'HOST': env.str('DB_HOST'),
-        'PORT': env.str('DB_PORT'),
+dev_db = os.getenv('DJANGO_DB')
+
+if dev_db:
+    DATABASES = {
+        'default': {
+             'ENGINE':'django.db.backends.sqlite3',
+            'NAME': env.str('DB_NAME'),
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env.str('DB_NAME'),
+            'USER': env.str('DB_USER'),
+            'PASSWORD': env.str('DB_PASSWORD'),
+            'HOST': env.str('DB_HOST'),
+            'PORT': env.str('DB_PORT'),
+        }
+    }
 
 {% if cookiecutter.use_redis == "Yes" -%}
 REDIS_URI=env.str('REDIS_URI')
