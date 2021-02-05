@@ -1,18 +1,6 @@
 Quick use:
 $ cookiecutter https://github.com/haricot/django-webpack-app (needed use redis)
 
-'''
-full_name []: 
-email []: 
-project_name [project]: 
-project_slug [project]: 
-version [0.1.0]: 
-Select use_redis:
-1 - No
-2 - Yes
-Choose from 1, 2 [1]: 2
-Copied default .env.example to .env
-'''
 $ cd project/
 
 $ docker-compose -f  docker-compose.yml build
