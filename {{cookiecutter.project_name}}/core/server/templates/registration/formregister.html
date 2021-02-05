@@ -1,48 +1,48 @@
 <form  id="form" method="POST"  class="form-horizontal needs-validation" novalidate="">
-               <fieldset>
-                  {% csrf_token %}
-                <div class="form-group ">
-                <label class="col-sm-2 control-label ">
-                  Username
-                </label>
-              <div class="col-sm-10">
-                <input name="username" class="form-control" type="text" value="">
-              </div>
-            </div>
-              <div class="form-group ">
-                <label class="col-sm-2 control-label ">
-                  Email
-                </label>
-              <div class="col-sm-10">
-                <input name="email" class="form-control" type="email" value="">
-              </div>
-            </div>
-                <div class="form-group ">
-                <label class="col-sm-2 control-label ">
-                  Mot de passe
-                </label>
-              <div class="col-sm-10">
-                <input name="password" class="form-control" type="text" value="">
-              </div>
-            </div>
-                <div class="form-group ">
-                <label class="col-sm-2 control-label ">
-                  First name
-                </label>
-              <div class="col-sm-10">
-                <input name="first_name" class="form-control" type="text" value="">
-              </div>
-            </div>
-               <div class="form-group ">
-                <label class="col-sm-2 control-label ">
-                  Last name
-                </label>
-              <div class="col-sm-10">
-                <input name="last_name" class="form-control" type="text" value="">
-              </div>
-            </div>
-              <div class="form-actions">
-                <button type="submit" class="btn btn-primary js-tooltip" title="" data-original-title="Make a POST request on the Register resource">POST</button>
-              </div>
-            </fieldset>
-            </form>
+   <fieldset>
+      {% raw %}{% csrf_token %}{% endraw %}
+    <div class="form-group ">
+    <label class="col-sm-2 control-label ">
+      Username
+    </label>
+  <div class="col-sm-10">
+    <input name="username" class="form-control" type="text" value="">
+  </div>
+</div>
+  <div class="form-group ">
+    <label class="col-sm-2 control-label ">
+      Email
+    </label>
+  <div class="col-sm-10">
+    <input name="email" class="form-control" type="email" value="">
+  </div>
+</div>
+    <div class="form-group ">
+    <label class="col-sm-2 control-label ">
+      Mot de passe
+    </label>
+  <div class="col-sm-10">
+    <input name="password" class="form-control" type="text" value="">
+  </div>
+</div>
+    <div class="form-group ">
+    <label class="col-sm-2 control-label ">
+      First name
+    </label>
+  <div class="col-sm-10">
+    <input name="first_name" class="form-control" type="text" value="">
+  </div>
+</div>
+   <div class="form-group ">
+    <label class="col-sm-2 control-label ">
+      Last name
+    </label>
+  <div class="col-sm-10">
+    <input name="last_name" class="form-control" type="text" value="">
+  </div>
+</div>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary js-tooltip" title="" data-original-title="Make a POST request on the Register resource">POST</button>
+  </div>
+</fieldset>
+</form>

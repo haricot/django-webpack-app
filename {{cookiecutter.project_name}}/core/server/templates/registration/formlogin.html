@@ -1,12 +1,10 @@
 <form  id='formlogin' novalidate="">
-                            <fieldset>
-                              <input type="hidden" name="csrfmiddlewaretoken" value="DkQK28OwWUqIWmIQKzTOdl8cYlwf2xZsNe1LP3qocz6jjSXuQOG0oNM1uhK6kCD9">
+  <fieldset>
+    {% raw %}{% csrf_token %}{% endraw %}
     <div class="form-group ">
-  
     <label class="col-sm-2 control-label ">
       Username
     </label>
-
   <div class="col-sm-10">
     <input name="username" class="form-control" type="text" value="">
   </div>
@@ -19,8 +17,8 @@
     <input name="password" class="form-control" type="text" value="">
   </div>
 </div>
-                              <div class="form-actions">
-                                <button class="btn btn-primary js-tooltip " title="" data-original-title="Make a POST request on the Login resource">POST</button>
-                              </div>
-                            </fieldset>
-                          </form>
+  <div class="form-actions">
+    <button class="btn btn-primary js-tooltip " title="" data-original-title="Make a POST request on the Login resource">POST</button>
+  </div>
+</fieldset>
+</form>
